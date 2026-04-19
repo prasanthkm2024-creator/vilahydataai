@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vilahy Data Solutions — Enterprise SAP Data Specialists</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap');
+
+  :root {
+    --navy: #0b2545;
+    --navy-deep: #071a33;
+    --navy-mid: #0d2e5c;
+    --orange: #f26722;
+    --orange-dark: #d9541a;
+    --slate: #64748b;
+    --slate-light: #f1f5f9;
+    --white: #ffffff;
+    --text: #1e293b;
+    --muted: #94a3b8;
+    --border: #e2e8f0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--navy-deep);
+    color: #94a3b8;
+    font-size: 11px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    padding: 8px 0;
+  }
+  .topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar a { color: #cbd5e1; text-decoration: none; transition: color .2s; }
+  .topbar a:hover { color: var(--orange); }
+
+  /* ── HEADER ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ── DB LOGO MARK ── */
+  .logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .db-mark { flex-shrink: 0; }
+  .logo-text-main { font-size: 22px; font-weight: 600; color: var(--navy); letter-spacing: -.4px; }
+  .logo-text-sub  { font-size: 12px; color: var(--slate); font-weight: 400; margin-top: 1px; letter-spacing: .02em; }
+
+  nav { display: flex; align-items: center; gap: 32px; }
+  nav a {
+    font-size: 14px;
+    font-weight: 500;
+    color: #475569;
+    text-decoration: none;
+    transition: color .2s;
+  }
+  nav a:hover { color: var(--navy); }
+  .nav-cta {
+    background: var(--orange);
+    color: white !important;
+    padding: 9px 22px;
+    border-radius: 3px;
+    font-weight: 600 !important;
+    transition: background .2s !important;
+  }
+  .nav-cta:hover { background: var(--orange-dark) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 0 110px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.06) 1px, transparent 0);
+    background-size: 44px 44px;
+  }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    padding: 6px 14px;
+    border-radius: 3px;
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #cbd5e1;
+    margin-bottom: 28px;
+  }
+  .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 58px;
+    line-height: 1.05;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+  .hero h1 em { color: var(--orange); font-style: normal; }
+  .hero p {
+    font-size: 18px;
+    color: rgba(255,255,255,.8);
+    max-width: 520px;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--orange);
+    color: white;
+    padding: 13px 28px;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .btn-primary:hover { background: var(--orange-dark); }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255,255,255,.3);
+    color: white;
+    padding: 13px 28px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-outline:hover { background: white; color: var(--navy); }
+
+  /* Hero card */
+  .hero-card {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 6px;
+    padding: 32px;
+  }
+  .hero-card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+  .hero-card-quote {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px;
+    line-height: 1.55;
+    color: white;
+    font-weight: 400;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 28px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,.1);
+  }
+  .hero-stat-n { font-size: 26px; font-weight: 700; color: white; }
+  .hero-stat-l { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #94a3b8; margin-top: 2px; }
+
+  /* ── DB LOGO LARGE (hero card decoration) ── */
+  .db-hero-mark { display: flex; justify-content: center; margin-bottom: 24px; }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 96px 0; }
+  .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    font-weight: 400;
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .section-title br { display: block; }
+  .orange-rule { width: 48px; height: 4px; background: var(--orange); border-radius: 2px; }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 60px; align-items: start; }
+  .about-body { font-size: 17px; color: #475569; line-height: 1.8; }
+  .about-body p + p { margin-top: 18px; }
+
+  /* ── CHALLENGES ── */
+  .challenges { background: var(--slate-light); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .challenges-header { max-width: 700px; margin-bottom: 56px; }
+  .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    transition: box-shadow .2s, border-color .2s;
+  }
+  .card:hover { box-shadow: 0 8px 30px rgba(11,37,69,.08); border-color: rgba(11,37,69,.25); }
+  .card-rule { width: 40px; height: 4px; background: var(--orange); border-radius: 2px; margin-bottom: 20px; }
+  .card h3 { font-size: 17px; font-weight: 600; color: var(--navy); margin-bottom: 10px; }
+  .card p { font-size: 15px; color: var(--slate); line-height: 1.7; }
+
+  /* ── SERVICES ── */
+  .services-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 56px; }
+  .services-desc { color: var(--slate); font-size: 15px; max-width: 320px; line-height: 1.7; }
+  .service-card {
+    position: relative;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    text-decoration: none;
+    display: block;
+    overflow: hidden;
+    transition: box-shadow .25s, border-color .25s;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    height: 3px; width: 0;
+    background: var(--orange);
+    transition: width .4s ease;
+  }
+  .service-card:hover { box-shadow: 0 12px 40px rgba(11,37,69,.1); border-color: var(--navy); }
+  .service-card:hover::before { width: 100%; }
+  .service-icon { font-size: 28px; margin-bottom: 18px; display: block; }
+  .service-card h3 { font-size: 19px; font-weight: 600; color: var(--navy); margin-bottom: 10px; }
+  .service-card p { font-size: 15px; color: var(--slate); line-height: 1.7; margin-bottom: 24px; }
+  .service-link { font-size: 13px; font-weight: 600; color: var(--orange); letter-spacing: .04em; }
+
+  /* ── APPROACH ── */
+  .approach {
+    background: var(--navy);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .approach::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(135deg, transparent 49%, rgba(255,255,255,.04) 49%, rgba(255,255,255,.04) 51%, transparent 51%);
+    background-size: 28px 28px;
+  }
+  .approach-inner { position: relative; z-index: 1; }
+  .approach-header { max-width: 680px; margin-bottom: 64px; }
+  .approach-header .section-title { color: white; }
+  .steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; }
+  .step { position: relative; }
+  .step-top { display: flex; align-items: center; margin-bottom: 20px; }
+  .step-num {
+    width: 48px; height: 48px;
+    background: var(--orange);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .step-line { flex: 1; height: 1px; background: rgba(255,255,255,.2); margin-left: 12px; }
+  .step h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; padding-right: 16px; }
+  .step p { font-size: 14px; color: #94a3b8; line-height: 1.65; padding-right: 16px; }
+
+  /* ── WHY US ── */
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 48px; }
+  .why-item { display: flex; gap: 20px; }
+  .why-bar { width: 4px; border-radius: 4px; background: var(--orange); flex-shrink: 0; }
+  .why-item h3 { font-size: 17px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+  .why-item p { font-size: 15px; color: var(--slate); line-height: 1.7; }
+
+  /* ── ENGAGEMENTS ── */
+  .engagements { background: var(--slate-light); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  /* ── CTA ── */
+  .cta-section { background: var(--navy); color: white; padding: 96px 0; }
+  .cta-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 32px;
+    display: grid; grid-template-columns: 8fr 4fr; gap: 40px; align-items: center;
+  }
+  .cta-section .section-label { margin-bottom: 16px; }
+  .cta-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 46px; font-weight: 400; line-height: 1.1;
+  }
+  .cta-section p { color: #94a3b8; font-size: 17px; max-width: 480px; margin-top: 16px; line-height: 1.7; font-weight: 300; }
+  .cta-btn-wrap { display: flex; justify-content: flex-end; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 32px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-brand p:first-child { font-weight: 700; font-size: 17px; color: var(--navy); }
+  .footer-brand p:last-child { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .footer-copy { font-size: 12px; color: var(--muted); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-card { display: none; }
+    .hero h1 { font-size: 40px; }
+    .about-grid, .steps-grid, .cards-grid, .why-grid, .services-top { grid-template-columns: 1fr; }
+    .cta-inner { grid-template-columns: 1fr; }
+    .cta-btn-wrap { justify-content: flex-start; }
+    nav { display: none; }
+    .topbar-inner span:last-child { display: none; }
+  }
+
+  /* Fade-in on scroll */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>Enterprise SAP Data Specialists</span>
+    <a href="mailto:info@vilahydata.com">info@vilahydata.com</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo-wrap">
+      <!-- Database SVG Mark -->
+      <svg class="db-mark" width="38" height="44" viewBox="0 0 38 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bottom cylinder -->
+        <ellipse cx="19" cy="37" rx="19" ry="5" fill="#0b2545"/>
+        <rect x="0" y="27" width="38" height="10" fill="#0b2545"/>
+        <ellipse cx="19" cy="27" rx="19" ry="5" fill="#1a3d6b"/>
+        <!-- Mid cylinder -->
+        <ellipse cx="19" cy="22" rx="19" ry="5" fill="#0b2545"/>
+        <rect x="0" y="12" width="38" height="10" fill="#0b2545"/>
+        <ellipse cx="19" cy="12" rx="19" ry="5" fill="#1a3d6b"/>
+        <!-- Top cylinder (orange accent) -->
+        <ellipse cx="19" cy="7" rx="19" ry="5" fill="#0b2545"/>
+        <rect x="0" y="0" width="38" height="7" fill="#d95f1a"/>
+        <ellipse cx="19" cy="0" rx="19" ry="5" fill="#f26722"/>
+        <!-- Shine line -->
+        <line x1="5" y1="0" x2="13" y2="0" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="logo-text-main">Vilahy</div>
+        <div class="logo-text-sub">Data Solutions</div>
+      </div>
+    </a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#difference">Why Us</a>
+      <a href="#connect" class="nav-cta">Contact Us →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span></span>SAP Data · Governance · Quality</div>
+      <h1>Reliable enterprise data,<br><em>engineered end-to-end.</em></h1>
+      <p>We help large enterprises design, migrate, and govern SAP data so it is business-ready, trusted, and sustainable — well beyond go-live.</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn-primary">Explore Services →</a>
+        <a href="#connect" class="btn-outline">Talk to an expert</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <!-- Large DB mark in card -->
+      <div class="db-hero-mark">
+        <svg width="72" height="84" viewBox="0 0 72 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="36" cy="72" rx="36" ry="10" fill="rgba(255,255,255,0.08)"/>
+          <rect x="0" y="52" width="72" height="20" fill="rgba(255,255,255,0.08)"/>
+          <ellipse cx="36" cy="52" rx="36" ry="10" fill="rgba(255,255,255,0.13)"/>
+          <ellipse cx="36" cy="38" rx="36" ry="10" fill="rgba(255,255,255,0.08)"/>
+          <rect x="0" y="18" width="72" height="20" fill="rgba(255,255,255,0.08)"/>
+          <ellipse cx="36" cy="18" rx="36" ry="10" fill="rgba(255,255,255,0.13)"/>
+          <ellipse cx="36" cy="9" rx="36" ry="9" fill="rgba(242,103,34,0.25)"/>
+          <rect x="0" y="0" width="72" height="9" fill="rgba(242,103,34,0.3)"/>
+          <ellipse cx="36" cy="0" rx="36" ry="9" fill="rgba(242,103,34,0.55)"/>
+          <line x1="8" y1="0" x2="22" y2="0" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <!-- Checkmark overlay -->
+          <polyline points="22,40 31,50 50,28" fill="none" stroke="#f26722" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="hero-card-label">Operating principle</div>
+      <div class="hero-card-quote">"Reliable data doesn't happen by accident — it is designed, owned, and continuously managed."</div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-n">20+</div>
+          <div class="hero-stat-l">Years of SAP</div>
+        </div>
+        <div>
+          <div class="hero-stat-n">3</div>
+          <div class="hero-stat-l">Senior experts</div>
+        </div>
+        <div>
+          <div class="hero-stat-n">0</div>
+          <div class="hero-stat-l">Layered teams</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div class="section-inner">
+    <div class="about-grid fade-in">
+      <div>
+        <div class="section-label">Who we are</div>
+        <h2 class="section-title">Deep expertise.<br>Direct involvement.</h2>
+        <div class="orange-rule"></div>
+      </div>
+      <div class="about-body">
+        <p>Vilahy Data Solutions is a focused consulting firm dedicated to solving complex SAP data challenges in large enterprise environments.</p>
+        <p>Our foundation is built on three senior professionals with over two decades of hands-on experience in SAP data migrations, governance, and quality management. We operate with a clear principle — deep expertise and direct involvement deliver better outcomes than large, layered teams.</p>
+        <p>We work closely with organizations to ensure their data is not just technically moved, but business-ready, trusted, and sustainable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGES -->
+<section class="challenges">
+  <div class="section-inner">
+    <div class="challenges-header fade-in">
+      <div class="section-label">Challenges we address</div>
+      <h2 class="section-title">Most SAP programs struggle with data — not technology.</h2>
+    </div>
+    <div class="cards-grid">
+      <div class="card fade-in">
+        <div class="card-rule"></div>
+        <h3>Misplaced data ownership</h3>
+        <p>Organizations often assume data is an IT responsibility. In reality, data quality and validation depend on business ownership — and without that clarity, accountability falls through the gaps.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-rule"></div>
+        <h3>Fragmented delivery structures</h3>
+        <p>Functional and technical teams frequently operate in parallel rather than in partnership, creating blind spots and handover failures at the moments that matter most.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-rule"></div>
+        <h3>Late-stage pressure</h3>
+        <p>Delays upstream compress the data workstream. What should be a structured, validated process becomes a high-pressure sprint — raising the risk of errors that surface after go-live.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-rule"></div>
+        <h3>Lack of long-term data control</h3>
+        <p>Without governance frameworks in place, data quality that was hard-won during migration begins to erode almost immediately after go-live.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="services-top fade-in">
+      <div>
+        <div class="section-label">Our services</div>
+        <h2 class="section-title">Four focused areas of expertise</h2>
+      </div>
+      <p class="services-desc">Each service combines senior advisory with hands-on delivery — shaped around your program, not a standard template.</p>
+    </div>
+    <div class="cards-grid">
+      <a href="#" class="service-card fade-in">
+        <span class="service-icon">🔄</span>
+        <h3>SAP S/4HANA Data Migration</h3>
+        <p>End-to-end migration delivery — extraction, transformation, cleansing, validation, and cutover support — with hands-on senior involvement at every stage.</p>
+        <span class="service-link">Learn more →</span>
+      </a>
+      <a href="#" class="service-card fade-in">
+        <span class="service-icon">🏛️</span>
+        <h3>Data Governance</h3>
+        <p>Structured frameworks for data control, monitoring, and accountability — built to survive beyond go-live and grow with the organisation.</p>
+        <span class="service-link">Learn more →</span>
+      </a>
+      <a href="#" class="service-card fade-in">
+        <span class="service-icon">✅</span>
+        <h3>Data Quality Services</h3>
+        <p>Systematic profiling, rule definition, and continuous improvement to raise and maintain data quality across critical SAP domains.</p>
+        <span class="service-link">Learn more →</span>
+      </a>
+      <a href="#" class="service-card fade-in">
+        <span class="service-icon">🗺️</span>
+        <h3>Data Strategy &amp; Advisory</h3>
+        <p>Independent advisory on operating models, governance structures, and roadmaps — bringing objectivity and experience to decisions that shape long-term data capability.</p>
+        <span class="service-link">Learn more →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="section-inner approach-inner">
+    <div class="approach-header fade-in">
+      <div class="section-label">Our delivery model</div>
+      <h2 class="section-title">A structured path from assessment to sustained value</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step fade-in">
+        <div class="step-top">
+          <div class="step-num">01</div>
+          <div class="step-line"></div>
+        </div>
+        <h3>Assess &amp; Prepare</h3>
+        <p>Understand the landscape, baseline quality, define scope and approach.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-top">
+          <div class="step-num">02</div>
+          <div class="step-line"></div>
+        </div>
+        <h3>Migrate with Control</h3>
+        <p>Execute structured migration with governance gates at every stage.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-top">
+          <div class="step-num">03</div>
+          <div class="step-line"></div>
+        </div>
+        <h3>Establish Governance</h3>
+        <p>Build frameworks for ownership, monitoring, and accountability.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-top">
+          <div class="step-num">04</div>
+        </div>
+        <h3>Sustain &amp; Improve</h3>
+        <p>Embed continuous improvement so data quality compounds over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="difference">
+  <div class="section-inner">
+    <div style="max-width:680px; margin-bottom:56px;" class="fade-in">
+      <div class="section-label">Where we differ</div>
+      <h2 class="section-title">Why clients choose Vilahy</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item fade-in">
+        <div class="why-bar"></div>
+        <div>
+          <h3>Experienced leadership involvement</h3>
+          <p>Senior consultants are directly engaged in delivery, not just oversight. The people with the expertise are the ones doing the work.</p>
+        </div>
+      </div>
+      <div class="why-item fade-in">
+        <div class="why-bar"></div>
+        <div>
+          <h3>Independent and objective advisory</h3>
+          <p>No vendor relationships. No incentive to expand scope. Advice is given in the client's interest, not around a product roadmap.</p>
+        </div>
+      </div>
+      <div class="why-item fade-in">
+        <div class="why-bar"></div>
+        <div>
+          <h3>Business-centric execution</h3>
+          <p>We work from business requirements outward. Data decisions are grounded in what the organisation actually needs, not what the system defaults to.</p>
+        </div>
+      </div>
+      <div class="why-item fade-in">
+        <div class="why-bar"></div>
+        <div>
+          <h3>Adaptability under pressure</h3>
+          <p>SAP programs are rarely linear. We operate effectively in compressed timelines and shifting constraints without compromising quality.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENTS -->
+<section class="engagements">
+  <div class="section-inner">
+    <div style="max-width:680px; margin-bottom:56px;" class="fade-in">
+      <div class="section-label">How we work with clients</div>
+      <h2 class="section-title">Flexible engagement models</h2>
+    </div>
+    <div class="cards-grid">
+      <div class="card fade-in">
+        <h3>Program Delivery Support</h3>
+        <p>Embedded support for SAP migration programs — from data workstream leadership to specialist input at critical phases.</p>
+      </div>
+      <div class="card fade-in">
+        <h3>Focused Assessments</h3>
+        <p>Time-boxed evaluations of data quality, governance maturity, or migration readiness — with a clear output and actionable recommendations.</p>
+      </div>
+      <div class="card fade-in">
+        <h3>Advisory Partnerships</h3>
+        <p>Ongoing strategic advisory for organizations managing complex data environments or planning major SAP transitions.</p>
+      </div>
+      <div class="card fade-in">
+        <h3>Strategic Planning Engagements</h3>
+        <p>Structured engagements to define data strategy, operating models, and multi-year roadmaps aligned to business objectives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="connect">
+  <div class="cta-inner">
+    <div class="fade-in">
+      <div class="section-label">Let's talk</div>
+      <h2>Ready to make your SAP data a strategic asset?</h2>
+      <p>We bring practical insight, clarity, and execution focus to every engagement. If your organization is facing an SAP data challenge, we'd welcome a conversation.</p>
+    </div>
+    <div class="cta-btn-wrap fade-in">
+      <a href="mailto:info@vilahydata.com" class="btn-primary" style="font-size:15px; padding:15px 32px;">Get in Touch →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p>Vilahy Data Solutions</p>
+      <p>Enterprise SAP Data Specialists</p>
+    </div>
+    <p class="footer-copy">© 2026 Vilahy Data Solutions. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
