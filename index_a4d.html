@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask4DS Inc — Enterprise Data Transformation Simplified</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap');
+
+:root {
+  --ink:#0a0f1e;
+  --ink-d:#060b15;
+  --ink-m:#111827;
+  --cyan:#00c2cb;
+  --cyan-d:#009ca4;
+  --cyan-l:#e6fafb;
+  --violet:#6c47ff;
+  --violet-l:#f0edff;
+  --slate:#64748b;
+  --slate-l:#f1f5f9;
+  --slate-xl:#f8fafc;
+  --white:#fff;
+  --text:#1e293b;
+  --muted:#94a3b8;
+  --border:#e2e8f0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#fff;line-height:1.6;overflow-x:hidden}
+
+/* TOP BAR */
+.topbar{background:var(--ink-d);padding:7px 0;font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;color:#94a3b8}
+.topbar a{color:#cbd5e1;text-decoration:none;transition:color .2s}.topbar a:hover{color:var(--cyan)}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.header-inner{max-width:1200px;margin:0 auto;padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo-wrap{display:flex;align-items:center;gap:14px;text-decoration:none}
+.logo-text{display:flex;flex-direction:column}
+.logo-name{font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.5px;line-height:1}
+.logo-sub{font-size:10px;color:var(--slate);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+nav{display:flex;align-items:center;gap:30px}
+nav a{font-size:13px;font-weight:500;color:#475569;text-decoration:none;transition:color .2s}
+nav a:hover{color:var(--ink)}
+.nav-cta{background:var(--cyan);color:var(--ink)!important;padding:9px 20px;border-radius:4px;font-weight:600!important;transition:background .2s!important}
+.nav-cta:hover{background:var(--cyan-d)!important;color:white!important}
+
+/* HERO */
+.hero{background:var(--ink);color:white;position:relative;overflow:hidden;padding:96px 0 108px}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.04) 1px,transparent 0);background-size:36px 36px}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(0,194,203,.1) 0%,transparent 68%)}
+.hero-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:center;position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(0,194,203,.1);border:1px solid rgba(0,194,203,.22);padding:6px 14px;border-radius:4px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#a5f3f5;margin-bottom:26px}
+.hero-eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:58px;line-height:1.06;font-weight:400;margin-bottom:22px}
+.hero h1 em{color:var(--cyan);font-style:italic}
+.hero-desc{font-size:17px;color:rgba(255,255,255,.75);max-width:520px;line-height:1.78;font-weight:300;margin-bottom:14px}
+.hero-urgency{display:inline-flex;align-items:center;gap:8px;background:rgba(0,194,203,.1);border:1px solid rgba(0,194,203,.25);border-radius:4px;padding:7px 14px;font-size:12px;color:#a5f3f5;margin-bottom:36px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--cyan);color:var(--ink);padding:13px 28px;border-radius:4px;font-weight:700;font-size:14px;text-decoration:none;transition:background .2s;font-family:'DM Sans',sans-serif}
+.btn-primary:hover{background:var(--cyan-d);color:white}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.28);color:white;padding:13px 28px;border-radius:4px;font-weight:500;font-size:14px;text-decoration:none;transition:all .2s}
+.btn-ghost:hover{background:white;color:var(--ink)}
+
+/* HERO CARD */
+.hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.11);border-radius:10px;padding:28px}
+.hc-label{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px}
+.hc-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.hc-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:6px;padding:14px}
+.hc-stat-n{font-size:26px;font-weight:700;color:white;font-family:'DM Serif Display',serif}
+.hc-stat-l{font-size:11px;color:#94a3b8;margin-top:3px;line-height:1.4}
+.hc-tools{padding-top:16px;border-top:1px solid rgba(255,255,255,.09)}
+.hc-tools-lbl{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#64748b;margin-bottom:10px}
+.pill-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#cbd5e1}
+
+/* TRUST BAR */
+.trust-bar{background:var(--ink-d);padding:22px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.trust-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:9px;color:#94a3b8;font-size:12px;letter-spacing:.02em}
+.trust-dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+.trust-div{width:1px;height:18px;background:rgba(255,255,255,.09)}
+
+/* SECTIONS */
+section{padding:96px 0}
+.section-inner{max-width:1200px;margin:0 auto;padding:0 32px}
+.label{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:12px}
+.section-title{font-family:'DM Serif Display',serif;font-size:40px;font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:18px}
+.cyan-bar{width:44px;height:4px;background:var(--cyan);border-radius:2px}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:5fr 7fr;gap:60px;align-items:start}
+.about-body{font-size:16px;color:#475569;line-height:1.82}
+.about-body p+p{margin-top:17px}
+.about-pillars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:28px}
+.pillar{background:var(--slate-l);border-radius:6px;padding:18px;border-left:3px solid var(--cyan)}
+.pillar-t{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.pillar-d{font-size:12px;color:var(--slate);line-height:1.55}
+
+/* SERVICES TABS */
+.svc-tabs{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.svc-tab{padding:9px 18px;border-radius:4px;border:1px solid var(--border);font-size:13px;font-weight:500;color:var(--slate);cursor:pointer;transition:all .2s;background:white;font-family:'DM Sans',sans-serif}
+.svc-tab.active{background:var(--ink);color:white;border-color:var(--ink)}
+.svc-tab:hover:not(.active){border-color:var(--ink);color:var(--ink)}
+.svc-panel{display:none}
+.svc-panel.active{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:start}
+.svc-icon-box{width:60px;height:60px;background:var(--cyan-l);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:26px}
+.svc-title{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;color:var(--ink);margin-bottom:14px}
+.svc-desc{font-size:15px;color:var(--slate);line-height:1.78;margin-bottom:20px}
+.svc-feats{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+.svc-feats li{display:flex;gap:11px;font-size:14px;color:#374151;line-height:1.6}
+.svc-feats li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--cyan);margin-top:8px;flex-shrink:0}
+.tool-box{background:var(--violet-l);border-radius:6px;padding:18px;border-left:3px solid var(--violet)}
+.tool-box-lbl{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--violet);margin-bottom:10px}
+.tool-chips{display:flex;flex-wrap:wrap;gap:6px}
+.tool-chip{font-size:11px;padding:3px 10px;border-radius:20px;background:white;border:1px solid var(--border);color:#374151}
+
+/* APPROACH */
+.approach-bg{background:var(--ink);color:white;position:relative;overflow:hidden}
+.approach-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(135deg,transparent 49%,rgba(255,255,255,.025) 49%,rgba(255,255,255,.025) 51%,transparent 51%);background-size:28px 28px}
+.approach-inner{position:relative;z-index:1}
+.approach-bg .section-title{color:white}
+.phases{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.phases::before{content:'';position:absolute;top:23px;left:24px;right:24px;height:1px;background:rgba(255,255,255,.12);z-index:0}
+.phase{position:relative;z-index:1;padding-right:14px}
+.phase-dot{width:48px;height:48px;background:var(--cyan);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:18px}
+.phase h3{font-size:14px;font-weight:600;margin-bottom:7px;color:white}
+.phase p{font-size:12px;color:#94a3b8;line-height:1.6}
+
+/* CHALLENGES */
+.challenges-bg{background:var(--slate-xl);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:white;border:1px solid var(--border);border-radius:6px;padding:30px;transition:box-shadow .2s,border-color .2s}
+.card:hover{box-shadow:0 8px 28px rgba(10,15,30,.07);border-color:rgba(0,194,203,.4)}
+.card-bar{width:36px;height:4px;background:var(--cyan);border-radius:2px;margin-bottom:18px}
+.card h3{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:9px}
+.card p{font-size:14px;color:var(--slate);line-height:1.72}
+
+/* PLATFORM SECTION */
+.platform-grid{display:grid;grid-template-columns:6fr 6fr;gap:60px;align-items:center}
+.platform-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.plat-stat{background:white;border:1px solid var(--border);border-radius:6px;padding:18px;border-top:3px solid var(--cyan)}
+.plat-stat-n{font-size:28px;font-weight:700;color:var(--ink);font-family:'DM Serif Display',serif}
+.plat-stat-l{font-size:11px;color:var(--slate);margin-top:4px;line-height:1.4}
+.platform-feats{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+.plat-feat{display:flex;gap:10px;font-size:13px;color:#374151;line-height:1.6}
+.plat-feat::before{content:'✓';font-size:11px;font-weight:700;color:var(--cyan);margin-top:1px;flex-shrink:0}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px 44px}
+.why-item{display:flex;gap:18px}
+.why-bar{width:4px;border-radius:4px;background:var(--cyan);flex-shrink:0}
+.why-item h3{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:7px}
+.why-item p{font-size:14px;color:var(--slate);line-height:1.72}
+
+/* INDUSTRIES */
+.ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
+.ind-card{background:var(--slate-l);border-radius:6px;padding:22px 18px;border:1px solid var(--border);transition:border-color .2s,box-shadow .2s}
+.ind-card:hover{border-color:var(--cyan);box-shadow:0 4px 16px rgba(0,194,203,.1)}
+.ind-icon{font-size:26px;margin-bottom:9px;display:block}
+.ind-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.ind-desc{font-size:11px;color:var(--slate);line-height:1.55}
+
+/* ENGAGEMENTS */
+.eng-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
+.eng-card{background:white;border:1px solid var(--border);border-radius:6px;padding:26px;position:relative;overflow:hidden;transition:box-shadow .2s}
+.eng-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.eng-card:hover{box-shadow:0 6px 24px rgba(10,15,30,.08)}.eng-card:hover::after{transform:scaleX(1)}
+.eng-num{font-size:32px;font-weight:700;color:var(--border);margin-bottom:10px;font-family:'DM Serif Display',serif}
+.eng-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.eng-desc{font-size:13px;color:var(--slate);line-height:1.65}
+
+/* CTA */
+.cta-bg{background:var(--ink);padding:96px 0}
+.cta-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:7fr 5fr;gap:40px;align-items:center}
+.cta-bg .section-title{color:white;margin-top:10px}
+.cta-bg p{color:#94a3b8;font-size:16px;margin-top:14px;line-height:1.72;font-weight:300}
+.cta-form{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.11);border-radius:10px;padding:26px}
+.cta-form input,.cta-form select,.cta-form textarea{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:10px 13px;font-size:13px;color:white;font-family:'DM Sans',sans-serif;margin-bottom:10px;outline:none}
+.cta-form input::placeholder,.cta-form textarea::placeholder{color:#64748b}
+.cta-form select{color:#64748b}
+.cta-form select option{background:var(--ink);color:white}
+.cta-form textarea{height:76px;resize:none}
+.cta-form button{width:100%;background:var(--cyan);color:var(--ink);border:none;padding:12px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.cta-form button:hover{background:var(--cyan-d);color:white}
+
+/* FOOTER */
+footer{background:var(--ink-d);padding:48px 0 28px}
+.footer-grid{max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:3fr 2fr 2fr 2fr;gap:36px;margin-bottom:36px}
+.footer-brand-n{font-size:18px;font-weight:700;color:white;margin-bottom:8px;font-family:'DM Serif Display',serif}
+.footer-brand-d{font-size:12px;color:#64748b;line-height:1.6;max-width:210px}
+.footer-col-h{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#475569;margin-bottom:14px}
+.footer-col a{display:block;font-size:12px;color:#64748b;text-decoration:none;margin-bottom:7px;transition:color .2s}
+.footer-col a:hover{color:#cbd5e1}
+.footer-bottom{max-width:1200px;margin:0 auto;padding:22px 32px 0;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:11px;color:#475569}
+.footer-email{font-size:11px;color:#64748b;text-decoration:none}
+.footer-email:hover{color:var(--cyan)}
+
+/* FADE */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.fade-in.visible{opacity:1;transform:none}
+
+/* SERVICE HEADER ROW */
+.svc-header{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:48px}
+.svc-header-right{font-size:14px;color:var(--slate);max-width:340px;line-height:1.7}
+
+/* MOBILE */
+@media(max-width:960px){
+  .hero-inner,.about-grid,.platform-grid,.cta-inner{grid-template-columns:1fr}
+  .hero-card,.footer-grid{grid-template-columns:1fr 1fr}
+  .svc-panel.active,.phases{grid-template-columns:1fr 1fr}
+  .ind-grid,.eng-grid,.cards-grid,.why-grid{grid-template-columns:1fr 1fr}
+  nav,.about-pillars{display:none}
+  .hero h1{font-size:40px}
+  .section-title{font-size:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>SAP Data Migration · ECC → S/4HANA · Syniti ADM · Enterprise Data Transformation</span>
+    <a href="mailto:info@ask4ds.com">info@ask4ds.com</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo-wrap">
+      <!-- Ask4DS Logo — data query mark -->
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="42" height="42" rx="10" fill="#0a0f1e"/>
+        <path d="M14 30 L23 16 L32 30" fill="none" stroke="#00c2cb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="17" y1="25" x2="29" y2="25" stroke="#00c2cb" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="23" cy="35" r="2" fill="#00c2cb"/>
+        <line x1="23" y1="30.5" x2="23" y2="32.5" stroke="#00c2cb" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-name">Ask4DS</span>
+        <span class="logo-sub">Inc</span>
+      </div>
+    </a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#platform">Platform</a>
+      <a href="#industries">Industries</a>
+      <a href="#connect" class="nav-cta">Talk to us →</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><span></span>SAP ECC · S/4HANA · Syniti ADM · Data Governance</div>
+      <h1>Enterprise data<br>transformation,<br><em>simplified.</em></h1>
+      <p class="hero-desc">Ask4DS delivers end-to-end SAP data migration and governance solutions — moving your data from ECC to S/4HANA using Syniti ADM, with clarity, precision, and zero surprises at go-live.</p>
+      <div class="hero-urgency">⚠ SAP ECC mainstream support ends December 2027 — your migration window is now</div>
+      <div class="hero-btns">
+        <a href="#services" class="btn-primary">Explore Our Services →</a>
+        <a href="#connect" class="btn-ghost">Book a free assessment</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-label">Our delivery record</div>
+      <div class="hc-stats">
+        <div class="hc-stat">
+          <div class="hc-stat-n">100+</div>
+          <div class="hc-stat-l">Migration objects successfully delivered</div>
+        </div>
+        <div class="hc-stat">
+          <div class="hc-stat-n">98%</div>
+          <div class="hc-stat-l">Average go-live success rate</div>
+        </div>
+        <div class="hc-stat">
+          <div class="hc-stat-n">S/4</div>
+          <div class="hc-stat-l">HANA certified migration specialists</div>
+        </div>
+        <div class="hc-stat">
+          <div class="hc-stat-n">0</div>
+          <div class="hc-stat-l">Critical data failures at cutover</div>
+        </div>
+      </div>
+      <div class="hc-tools">
+        <div class="hc-tools-lbl">Core platforms &amp; tools</div>
+        <div class="pill-wrap">
+          <span class="pill">Syniti ADM</span>
+          <span class="pill">LTMC</span>
+          <span class="pill">S/4HANA</span>
+          <span class="pill">SAP MDG</span>
+          <span class="pill">LSMW</span>
+          <span class="pill">SSMS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="trust-dot"></span>ECC to S/4HANA Migration</div>
+    <div class="trust-div"></div>
+    <div class="trust-item"><span class="trust-dot"></span>Syniti ADM / ADMM</div>
+    <div class="trust-div"></div>
+    <div class="trust-item"><span class="trust-dot"></span>SAP Master Data Governance</div>
+    <div class="trust-div"></div>
+    <div class="trust-item"><span class="trust-dot"></span>Data Quality &amp; Profiling</div>
+    <div class="trust-div"></div>
+    <div class="trust-item"><span class="trust-dot"></span>MM · FI · SD · PP · PM · CO</div>
+    <div class="trust-div"></div>
+    <div class="trust-item"><span class="trust-dot"></span>Based in the United States</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="fade-in">
+        <span class="label">Who we are</span>
+        <h2 class="section-title">We make complex SAP data migrations work</h2>
+        <div class="cyan-bar" style="margin-bottom:24px"></div>
+        <div class="about-body">
+          <p>Ask4DS Inc is a specialist SAP data migration and transformation consultancy. We work with enterprises navigating the complexities of ECC-to-S/4HANA migrations — where data quality, migration accuracy, and go-live confidence are non-negotiable.</p>
+          <p>Our team combines deep SAP functional knowledge across MM, FI, SD, CO, PS, and PM with hands-on Syniti ADM platform expertise. We do not manage programs from a distance — we are embedded in your data, your staging tables, and your cutover runbook.</p>
+          <p>Ask4DS was founded on a single belief: enterprise data transformation does not have to be complicated. With the right expertise and the right platform, it can be systematic, transparent, and delivered on time.</p>
+        </div>
+        <div class="about-pillars" style="margin-top:28px">
+          <div class="pillar">
+            <div class="pillar-t">Precision</div>
+            <div class="pillar-d">Field-level accuracy on every migration object — from MARA to AUSP</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-t">Transparency</div>
+            <div class="pillar-d">Clear dashboards, documented rules, and reconciliation queries you own</div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-t">Speed</div>
+            <div class="pillar-d">Proven runbooks that compress cutover windows without cutting corners</div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div style="background:var(--ink);border-radius:10px;padding:36px;color:white">
+          <div style="font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:20px">The Ask4DS difference</div>
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;gap:14px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)">
+              <div style="width:36px;height:36px;background:rgba(0,194,203,.15);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">⚡</div>
+              <div>
+                <div style="font-size:14px;font-weight:600;margin-bottom:4px">Accelerated migration delivery</div>
+                <div style="font-size:12px;color:#94a3b8;line-height:1.6">Pre-built templates for all 24+ MM migration objects. Proven Syniti ADM configuration patterns ready to deploy on day one.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)">
+              <div style="width:36px;height:36px;background:rgba(0,194,203,.15);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🎯</div>
+              <div>
+                <div style="font-size:14px;font-weight:600;margin-bottom:4px">Zero-gap data quality</div>
+                <div style="font-size:12px;color:#94a3b8;line-height:1.6">SQL-based validation at every migration wave. Source-to-target reconciliation down to the row level — before any record goes to SAP.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)">
+              <div style="width:36px;height:36px;background:rgba(0,194,203,.15);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🔗</div>
+              <div>
+                <div style="font-size:14px;font-weight:600;margin-bottom:4px">Syniti ADM deep expertise</div>
+                <div style="font-size:12px;color:#94a3b8;line-height:1.6">Advanced View Builder, Gen SQL diagnostics, load cycle governance, CranPort packages, and DVN management — not just the basics.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:14px">
+              <div style="width:36px;height:36px;background:rgba(0,194,203,.15);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📋</div>
+              <div>
+                <div style="font-size:14px;font-weight:600;margin-bottom:4px">Cutover-ready documentation</div>
+                <div style="font-size:12px;color:#94a3b8;line-height:1.6">Every engagement delivers a complete cutover runbook — Mock 1, Mock 2, and Go-Live sequences with timing, owners, and rollback procedures.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--slate-xl);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="section-inner">
+    <div class="svc-header fade-in">
+      <div>
+        <span class="label">What we do</span>
+        <h2 class="section-title">Services built for SAP data complexity</h2>
+      </div>
+      <div class="svc-header-right">From initial readiness assessment through go-live and hypercare — we cover the full data migration lifecycle.</div>
+    </div>
+    <div class="svc-tabs">
+      <button class="svc-tab active" onclick="showTab(event,'migration')">ECC→S/4HANA Migration</button>
+      <button class="svc-tab" onclick="showTab(event,'syniti')">Syniti ADM Services</button>
+      <button class="svc-tab" onclick="showTab(event,'governance')">Data Governance (MDG)</button>
+      <button class="svc-tab" onclick="showTab(event,'assessment')">Readiness Assessment</button>
+      <button class="svc-tab" onclick="showTab(event,'implementation')">SAP Implementation</button>
+    </div>
+
+    <!-- Tab 1 -->
+    <div class="svc-panel active" id="tab-migration">
+      <div class="fade-in">
+        <div class="svc-icon-box">🚀</div>
+        <h3 class="svc-title">ECC to S/4HANA Data Migration</h3>
+        <p class="svc-desc">End-to-end data migration from SAP ECC to S/4HANA covering all master data and transactional objects. We manage every wave — from data extraction and cleansing through staging, validation, mock loads, and production cutover.</p>
+        <ul class="svc-feats">
+          <li>Material Master migration (MARA, MARC, MVKE, MARD, MBEW, MARM) — all 24+ objects</li>
+          <li>Vendor master, customer master, and chart of accounts harmonisation</li>
+          <li>Classification and characteristic migration (AUSP, KLAH, INOB, KSSK)</li>
+          <li>FI-AA asset migration including AuC, WBS settlement, and parallel ledger alignment</li>
+          <li>Multi-wave mock load execution with documented success rate tracking</li>
+          <li>LSMW, LTMC, and BAPI-based loading strategies tailored per object</li>
+        </ul>
+        <div class="tool-box">
+          <div class="tool-box-lbl">Migration tools &amp; platforms</div>
+          <div class="tool-chips">
+            <span class="tool-chip">Syniti ADM</span><span class="tool-chip">LTMC</span><span class="tool-chip">LSMW</span><span class="tool-chip">BAPI_MATERIAL_SAVEDATA</span><span class="tool-chip">SSMS</span><span class="tool-chip">SE16N</span>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="background:white;border:1px solid var(--border);border-radius:8px;padding:28px">
+        <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--slate);margin-bottom:18px">Migration object coverage</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:var(--slate-l);border-radius:4px;padding:12px">
+            <div style="font-size:11px;font-weight:700;color:var(--ink);margin-bottom:6px">MM — Material Master</div>
+            <div style="font-size:11px;color:var(--slate);line-height:1.6">MARA · MARC · MVKE · MARD · MBEW · MARM · MAKT · MLGN · MLGT · MARA Classification</div>
+          </div>
+          <div style="background:var(--slate-l);border-radius:4px;padding:12px">
+            <div style="font-size:11px;font-weight:700;color:var(--ink);margin-bottom:6px">FI — Asset Accounting</div>
+            <div style="font-size:11px;color:var(--slate);line-height:1.6">Asset Master · AuC · WBS Settlement · Depreciation Areas · Parallel Ledger</div>
+          </div>
+          <div style="background:var(--slate-l);border-radius:4px;padding:12px">
+            <div style="font-size:11px;font-weight:700;color:var(--ink);margin-bottom:6px">SD — Sales &amp; Distribution</div>
+            <div style="font-size:11px;color:var(--slate);line-height:1.6">Customer Master · Sales Views · Pricing · Output · Credit Master</div>
+          </div>
+          <div style="background:var(--slate-l);border-radius:4px;padding:12px">
+            <div style="font-size:11px;font-weight:700;color:var(--ink);margin-bottom:6px">CO — Controlling</div>
+            <div style="font-size:11px;color:var(--slate);line-height:1.6">Cost Centre · Profit Centre · Internal Orders · WBS Elements · Settlement</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2 -->
+    <div class="svc-panel" id="tab-syniti">
+      <div class="fade-in">
+        <div class="svc-icon-box">⚙️</div>
+        <h3 class="svc-title">Syniti ADM Managed Services</h3>
+        <p class="svc-desc">Specialist Syniti ADM (Data Migration Suite) configuration, administration, and optimisation. Whether you need platform setup, object build, or rescue of a stalled migration project, we deliver depth that generalist SIs cannot match.</p>
+        <ul class="svc-feats">
+          <li>Advanced View Builder (AVB) configuration and Logical Data Source design</li>
+          <li>Gen SQL log error diagnosis and resolution — AUSP, KSSK, INOB table alias fixes</li>
+          <li>Load Cycle governance — SIT → UAT → Mock 1 → Mock 2 → Go-Live sequencing</li>
+          <li>CranPort and Manual CranPort package configuration for BAPI loads</li>
+          <li>Data Validation Notes (DVN) authoring and Wave Process Area management</li>
+          <li>Migration object rescue — diagnosis and recovery of failed or stalled objects</li>
+        </ul>
+        <div class="tool-box">
+          <div class="tool-box-lbl">Syniti ADM modules covered</div>
+          <div class="tool-chips">
+            <span class="tool-chip">AVB</span><span class="tool-chip">DVN</span><span class="tool-chip">Wave Manager</span><span class="tool-chip">Load Cycle</span><span class="tool-chip">CranPort</span><span class="tool-chip">Key Mapping</span><span class="tool-chip">XREF tables</span>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="background:white;border:1px solid var(--border);border-radius:8px;padding:28px">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:16px">Why Syniti ADM expertise matters</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;gap:12px;font-size:13px;color:#374151;line-height:1.6"><span style="color:var(--cyan);font-weight:700;flex-shrink:0">✓</span>Configuration errors in AVB silently produce wrong source data — we catch them before they reach SAP</div>
+          <div style="display:flex;gap:12px;font-size:13px;color:#374151;line-height:1.6"><span style="color:var(--cyan);font-weight:700;flex-shrink:0">✓</span>Most SAP partners treat Syniti as a black box — we understand every table, every log, every error code</div>
+          <div style="display:flex;gap:12px;font-size:13px;color:#374151;line-height:1.6"><span style="color:var(--cyan);font-weight:700;flex-shrink:0">✓</span>We recover stalled Syniti projects that other teams could not diagnose — often in the same week</div>
+          <div style="display:flex;gap:12px;font-size:13px;color:#374151;line-height:1.6"><span style="color:var(--cyan);font-weight:700;flex-shrink:0">✓</span>Our SQL-based staging reconciliation catches data gaps that Syniti's built-in reports miss</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3 -->
+    <div class="svc-panel" id="tab-governance">
+      <div class="fade-in">
+        <div class="svc-icon-box">🛡️</div>
+        <h3 class="svc-title">Data Governance &amp; MDG</h3>
+        <p class="svc-desc">SAP Master Data Governance (MDG) design, implementation, and ongoing advisory. We build governance frameworks that outlast the migration — so the data quality we help you achieve continues to compound after go-live.</p>
+        <ul class="svc-feats">
+          <li>MDG hub design for Material, Vendor, Customer, and Financial master data</li>
+          <li>Data stewardship model design — roles, workflows, escalation paths</li>
+          <li>Data quality KPI framework — monitoring, alerting, and remediation playbooks</li>
+          <li>Change request workflow configuration and approval routing in MDG</li>
+          <li>Post-migration governance operating model — who owns what after day one</li>
+          <li>Data quality profiling using SSMS — duplicate detection, completeness scoring</li>
+        </ul>
+        <div class="tool-box">
+          <div class="tool-box-lbl">Governance tools &amp; standards</div>
+          <div class="tool-chips">
+            <span class="tool-chip">SAP MDG</span><span class="tool-chip">MDG-M</span><span class="tool-chip">MDG-F</span><span class="tool-chip">DQMII</span><span class="tool-chip">SE16N</span><span class="tool-chip">Custom KPI dashboards</span>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="background:var(--ink);border-radius:8px;padding:28px;color:white">
+        <div style="font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px">The governance gap most projects ignore</div>
+        <p style="font-size:13px;color:#94a3b8;line-height:1.75;margin-bottom:14px">Most data migration projects focus entirely on getting data into S/4HANA. The question of what happens the day after go-live — who approves changes, who monitors quality, who resolves conflicts — is left unanswered.</p>
+        <p style="font-size:13px;color:#94a3b8;line-height:1.75">Ask4DS treats governance as a deliverable, not an afterthought. Every migration engagement includes a post-go-live operating model so your data quality does not regress in the first 90 days.</p>
+      </div>
+    </div>
+
+    <!-- Tab 4 -->
+    <div class="svc-panel" id="tab-assessment">
+      <div class="fade-in">
+        <div class="svc-icon-box">🔍</div>
+        <h3 class="svc-title">Migration Readiness Assessment</h3>
+        <p class="svc-desc">A structured, time-boxed evaluation of your ECC data landscape. We profile your data, identify migration risk, and deliver a clear go/no-go recommendation with a remediation roadmap — before you commit to a full migration project.</p>
+        <ul class="svc-feats">
+          <li>Full data profiling across all migration-relevant SAP objects</li>
+          <li>Duplicate, completeness, and consistency analysis per module</li>
+          <li>Migration risk scoring — red, amber, green by object and data domain</li>
+          <li>Effort estimation for cleansing, mapping, and load activities per object</li>
+          <li>Recommended migration wave sequencing and dependency mapping</li>
+          <li>Deliverable: 20-page assessment report with prioritised remediation plan</li>
+        </ul>
+        <div class="tool-box">
+          <div class="tool-box-lbl">Typical assessment duration</div>
+          <div class="tool-chips">
+            <span class="tool-chip">2–4 weeks</span><span class="tool-chip">Remote or on-site</span><span class="tool-chip">Fixed fee</span><span class="tool-chip">Applies to migration project cost</span>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="background:white;border:1px solid var(--border);border-radius:8px;padding:28px">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:16px">What you get at the end</div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:28px;height:28px;background:var(--cyan-l);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">📄</div>
+            <div><div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px">Full data profile</div><div style="font-size:12px;color:var(--slate)">Row counts, completeness %, duplicate rate per object</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:28px;height:28px;background:var(--cyan-l);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">🗺️</div>
+            <div><div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px">Migration wave map</div><div style="font-size:12px;color:var(--slate)">Sequenced object dependency map with cutover recommendations</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:28px;height:28px;background:var(--cyan-l);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">⚠️</div>
+            <div><div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px">Risk register</div><div style="font-size:12px;color:var(--slate)">RAG-rated risks with mitigation actions and effort estimates</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div style="width:28px;height:28px;background:var(--cyan-l);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0">💰</div>
+            <div><div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px">Cost estimate</div><div style="font-size:12px;color:var(--slate)">Detailed effort and cost breakdown for full migration execution</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 5 -->
+    <div class="svc-panel" id="tab-implementation">
+      <div class="fade-in">
+        <div class="svc-icon-box">🏗️</div>
+        <h3 class="svc-title">SAP ECC &amp; S/4HANA Implementation</h3>
+        <p class="svc-desc">New SAP implementations designed with data quality built in from day one. Whether you are going live on ECC or moving directly to S/4HANA, we configure the system and migrate the data — no hand-offs between separate teams.</p>
+        <ul class="svc-feats">
+          <li>MM, FI, SD, CO, PS, and PM module configuration and data setup</li>
+          <li>Master data design — material types, account groups, plant structures</li>
+          <li>Org structure definition — company codes, plants, storage locations, sales areas</li>
+          <li>Initial data load for new implementations — legacy to SAP object mapping</li>
+          <li>Integration testing with SAP data as the controlling variable</li>
+          <li>Hypercare support — data issue resolution in the first 90 days post-go-live</li>
+        </ul>
+        <div class="tool-box">
+          <div class="tool-box-lbl">SAP modules covered</div>
+          <div class="tool-chips">
+            <span class="tool-chip">MM</span><span class="tool-chip">FI / FI-AA</span><span class="tool-chip">SD</span><span class="tool-chip">CO</span><span class="tool-chip">PS</span><span class="tool-chip">PM</span><span class="tool-chip">PP</span><span class="tool-chip">WM</span>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in" style="background:white;border:1px solid var(--border);border-radius:8px;padding:28px">
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:16px">Our implementation advantage</div>
+        <p style="font-size:13px;color:var(--slate);line-height:1.75;margin-bottom:16px">Most SI-led SAP implementations treat data as a workstream that runs parallel to configuration. At Ask4DS, data design and system configuration are inseparable — because data gaps discovered after configuration is complete cost ten times more to fix.</p>
+        <p style="font-size:13px;color:var(--slate);line-height:1.75">Our implementation methodology starts with data: what objects exist, how they relate, and what quality standards are required — before a single configuration decision is made.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach-bg" id="approach">
+  <div class="section-inner approach-inner">
+    <div style="max-width:620px;margin-bottom:52px" class="fade-in">
+      <span class="label">How we work</span>
+      <h2 class="section-title">A structured approach to every engagement</h2>
+      <p style="color:#94a3b8;font-size:15px;margin-top:14px;line-height:1.75;font-weight:300">Migration projects fail when approach is improvised. Ours is not. Every Ask4DS engagement follows the same proven five-phase methodology — with defined gates, documented outputs, and clear accountability at each stage.</p>
+    </div>
+    <div class="phases fade-in">
+      <div class="phase">
+        <div class="phase-dot">01</div>
+        <h3>Assess</h3>
+        <p>Profile source data, identify risks, map object dependencies, and define the migration scope with precision.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-dot">02</div>
+        <h3>Design</h3>
+        <p>Define mapping rules, transformation logic, validation criteria, and Syniti ADM configuration architecture.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-dot">03</div>
+        <h3>Build</h3>
+        <p>Develop migration objects in Syniti ADM, create staging views, and implement SQL-based reconciliation queries.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-dot">04</div>
+        <h3>Test</h3>
+        <p>Execute SIT, UAT, Mock 1, and Mock 2 load cycles. Track and resolve errors systematically to 98%+ success rate.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-dot">05</div>
+        <h3>Go-Live</h3>
+        <p>Execute production cutover using the tested runbook. Hypercare support through the first close cycle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGES -->
+<section class="challenges-bg">
+  <div class="section-inner">
+    <div style="max-width:620px;margin-bottom:44px" class="fade-in">
+      <span class="label">Common pain points</span>
+      <h2 class="section-title">The data migration challenges we solve every day</h2>
+    </div>
+    <div class="cards-grid">
+      <div class="card fade-in">
+        <div class="card-bar"></div>
+        <h3>Two different classification architectures in the same system</h3>
+        <p>Some class types use INOB.CUOBJ linkage; others use direct MATNR-to-AUSP linkage. Miss this distinction and half your classification data silently disappears. We diagnose and handle both patterns in every migration.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-bar"></div>
+        <h3>Material number format mismatches breaking loads</h3>
+        <p>Legacy systems store MATNR without leading zeros. SAP requires 18-character zero-padded numbers. Without proper conversion, BAPI calls fail silently or load to the wrong material. Our staging validation catches this before it reaches SAP.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-bar"></div>
+        <h3>SALESDATAX X-flag omissions causing silent non-updates</h3>
+        <p>BAPI_MATERIAL_SAVEDATA requires explicit X flags on every field being changed. Omit the flag and the BAPI returns success — but makes no update. A mistake we see on almost every new client's existing LSMW. We fix it systematically.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-bar"></div>
+        <h3>Syniti ADM Gen SQL errors that nobody can diagnose</h3>
+        <p>Table alias mismatches in AUSP/CABN joins, incorrect ESOKZ filters for subcontracting PIRs, and broken CranPort package configurations. Our team has seen — and fixed — every Syniti error pattern across multiple migrations.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-bar"></div>
+        <h3>AuC and WBS settlement not matching across FI and CO</h3>
+        <p>Asset under Construction settlement to final assets requires coordinated CJ88, AIAB, and AIBU transactions with exact account assignment. Sequence errors create FI-CO reconciliation gaps that persist long after go-live.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-bar"></div>
+        <h3>Parallel GAAP valuations diverging unexpectedly at cutover</h3>
+        <p>When IFRS and local GAAP use different useful lives, depreciation rates, and cost allocations, values diverge through every layer — from cost centres to profitability segments. We ensure both ledgers carry consistent valuations from day one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM (replaces Syniti section) -->
+<section id="platform">
+  <div class="section-inner">
+    <div class="platform-grid">
+      <div class="fade-in">
+        <span class="label">Platform expertise</span>
+        <h2 class="section-title">Syniti ADM — our primary migration platform</h2>
+        <div class="cyan-bar" style="margin-bottom:22px"></div>
+        <p style="font-size:15px;color:var(--slate);line-height:1.78;margin-bottom:22px">Syniti ADM (formerly BackOffice Associates DSP) is the enterprise migration platform of choice for large-scale SAP projects. Ask4DS has delivered migrations using Syniti ADM across multiple industries — and we know the platform at a depth most partners do not reach.</p>
+        <p style="font-size:15px;color:var(--slate);line-height:1.78;margin-bottom:22px">We do not just configure migration objects. We understand the underlying DSP architecture — how staging views feed CranPort packages, how Key Mapping preserves object identity across systems, and how the Gen SQL engine generates the load instructions that drive every SAP posting.</p>
+        <div class="platform-feats">
+          <div class="plat-feat">Advanced View Builder — multi-source LDS design with UNION ALL support</div>
+          <div class="plat-feat">Gen SQL log diagnosis — table alias and join condition error resolution</div>
+          <div class="plat-feat">Load Cycle governance — SIT, UAT, Mock 1/2/3, Go-Live wave sequencing</div>
+          <div class="plat-feat">DVN authoring — documented validation rules per object per cycle</div>
+          <div class="plat-feat">CranPort vs Manual CranPort — package type selection and configuration</div>
+          <div class="plat-feat">Key Mapping and XREF table management across source systems</div>
+          <div class="plat-feat">Wave Process Area Execution Details — real-time load monitoring</div>
+          <div class="plat-feat">LTMOM migration object transport between clients and systems</div>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div class="platform-stats">
+          <div class="plat-stat">
+            <div class="plat-stat-n">24+</div>
+            <div class="plat-stat-l">MM migration objects built and tested on Syniti ADM</div>
+          </div>
+          <div class="plat-stat">
+            <div class="plat-stat-n">8</div>
+            <div class="plat-stat-l">Step Syniti methodology — fully implemented on every engagement</div>
+          </div>
+          <div class="plat-stat">
+            <div class="plat-stat-n">3x</div>
+            <div class="plat-stat-l">Faster error resolution than average — from Gen SQL log to fix</div>
+          </div>
+          <div class="plat-stat">
+            <div class="plat-stat-n">100%</div>
+            <div class="plat-stat-l">Mock load documentation coverage — every run, every object</div>
+          </div>
+        </div>
+        <div style="background:var(--ink);border-radius:8px;padding:24px;margin-top:14px;color:white">
+          <div style="font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px">Syniti ADM migration pipeline we manage</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:#94a3b8">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0"></div>Source system extract → Staging tables (SSMS)
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:#94a3b8">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0"></div>Advanced View Builder → Logical Data Sources
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:#94a3b8">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0"></div>Field mapping + transformation rules → CTE SQL views
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:#94a3b8">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0"></div>CranPort packages → BAPI / IDOC / LTMC load
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:#94a3b8">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0"></div>Wave execution → SAP target system
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:12px;color:#94a3b8">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--cyan);flex-shrink:0"></div>SQL reconciliation → Source-to-target sign-off
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="difference" style="background:var(--slate-xl);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="section-inner">
+    <div style="max-width:620px;margin-bottom:52px" class="fade-in">
+      <span class="label">Why clients choose us</span>
+      <h2 class="section-title">What makes Ask4DS different</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item fade-in">
+        <div class="why-bar"></div>
+        <div>
+          <h3>Functional and technical depth in one team</h3>
+          <p>Most SAP partners separate functional consultants from data engineers. Ask4DS operates across both — understanding SAP business processes while writing the SQL, migration rules, and reconciliation queries that make data correct in the target system.</p>
+        </div>
+      </div>
+      <div class="why-item fade-in">
+        <div class="why-bar"></div>
+        <div>
+          <h3>Syniti ADM specialists, not generalists</h3>
+          <p>We are not a broad SI that lists Syniti as a tool. We understand the platform end-to-end — Advanced View Builder, Gen SQL diagnostics, load cycle governance, CranPort configuration, and staging table reconciliation at the field level.</p>
+        </div>
+      </div>
+      <div class="why-item fade-in">
+        <div class="why-bar"></div>
+        <div>
+          <h3>Senior specialists deliver the work</h3>
+          <p>The consultants who scope your project are the consultants who deliver it. No junior analyst hand-offs after kick-off. Our team is hands-on through discovery, build, testing, and go-live — not just in steering committee meetings.</p>
+        </div>
+      </div>
+      <div class="why-item fade-in">
+        <div class="why-bar"></div>
+        <div>
+          <h3>Data governance built for the long term</h3>
+          <p>We treat governance as a deliverable, not an afterthought. Every engagement includes a post-go-live operating model and handover documentation — so the data quality we achieve together does not regress after we leave.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries">
+  <div class="section-inner">
+    <div class="fade-in" style="max-width:620px">
+      <span class="label">Industries we serve</span>
+      <h2 class="section-title">Sector experience that shapes better outcomes</h2>
+    </div>
+    <p style="color:var(--slate);font-size:14px;line-height:1.75;max-width:560px;margin-top:14px" class="fade-in">SAP data complexity varies significantly by industry. Our experience spans the sectors where migration accuracy matters most — and where the cost of getting it wrong is greatest.</p>
+    <div class="ind-grid">
+      <div class="ind-card fade-in"><span class="ind-icon">🌾</span><div class="ind-title">Agriculture &amp; Seeds</div><div class="ind-desc">Classification migration for seed products — YCS, YCL, YPT class types, AUSP, global cluster characteristics, and multi-source PIVOT-based staging</div></div>
+      <div class="ind-card fade-in"><span class="ind-icon">🏭</span><div class="ind-title">Manufacturing</div><div class="ind-desc">Material master, BOMs, routing, plant data, MRP views — complex multi-plant migrations with production continuity requirements</div></div>
+      <div class="ind-card fade-in"><span class="ind-icon">⚡</span><div class="ind-title">Energy &amp; Utilities</div><div class="ind-desc">Equipment master, functional locations, maintenance plans, MRO spare parts governance and classification migration</div></div>
+      <div class="ind-card fade-in"><span class="ind-icon">💊</span><div class="ind-title">Pharmaceuticals</div><div class="ind-desc">Batch management, QMAT inspection setup, GMP compliance, serialisation, and regulatory data integrity requirements</div></div>
+      <div class="ind-card fade-in"><span class="ind-icon">🚛</span><div class="ind-title">Logistics &amp; Distribution</div><div class="ind-desc">Vendor master, purchasing info records, source lists, inventory data, and multi-client data separation challenges</div></div>
+      <div class="ind-card fade-in"><span class="ind-icon">🏗️</span><div class="ind-title">Construction &amp; Engineering</div><div class="ind-desc">WBS elements, project systems, FI-AA asset accounting, AuC workflows, and investment order settlement patterns</div></div>
+      <div class="ind-card fade-in"><span class="ind-icon">🛒</span><div class="ind-title">Retail &amp; Consumer Goods</div><div class="ind-desc">Article/SKU master, sales views (MVKE), pricing hierarchy (PRDHA), profit centre assignment, and customer data governance</div></div>
+      <div class="ind-card fade-in"><span class="ind-icon">🌐</span><div class="ind-title">Multinational Enterprises</div><div class="ind-desc">Multi-company-code migrations, cross-country master data harmonisation, parallel GAAP ledger alignment, and multi-language descriptions</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENTS -->
+<section style="background:var(--slate-xl);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="section-inner">
+    <div class="fade-in" style="max-width:620px;margin-bottom:12px">
+      <span class="label">How we engage</span>
+      <h2 class="section-title">Flexible models for every stage of your SAP journey</h2>
+    </div>
+    <div class="eng-grid">
+      <div class="eng-card fade-in">
+        <div class="eng-num">01</div>
+        <div class="eng-title">Full project delivery</div>
+        <p class="eng-desc">End-to-end ECC-to-S/4HANA migration — from readiness assessment through go-live and hypercare. Senior delivery, fixed scope, clear milestones from day one.</p>
+      </div>
+      <div class="eng-card fade-in">
+        <div class="eng-num">02</div>
+        <div class="eng-title">Data workstream leadership</div>
+        <p class="eng-desc">Embedded data migration lead within your existing SI-led programme. We own the data workstream so your SI can focus on configuration and functional testing.</p>
+      </div>
+      <div class="eng-card fade-in">
+        <div class="eng-num">03</div>
+        <div class="eng-title">Migration rescue</div>
+        <p class="eng-desc">Rapid intervention on stalled or failing migration projects — Syniti ADM diagnosis, object rebuild, load error resolution, and cutover replanning under time pressure.</p>
+      </div>
+      <div class="eng-card fade-in">
+        <div class="eng-num">04</div>
+        <div class="eng-title">Governance advisory</div>
+        <p class="eng-desc">Strategic advisory for organisations building or maturing SAP master data governance — MDG design, stewardship model setup, and data quality KPI frameworks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-bg" id="connect">
+  <div class="cta-inner">
+    <div class="fade-in">
+      <span class="label">Let's talk</span>
+      <h2 class="section-title">Ready to simplify your enterprise data transformation?</h2>
+      <p>Whether you are planning your ECC-to-S/4HANA migration, already mid-project and need specialist support, or looking to establish data governance that lasts — Ask4DS brings the depth and directness to make it work. Tell us where you are.</p>
+    </div>
+    <div class="cta-form fade-in" id="contact-form-wrap">
+      <div id="contact-form">
+        <input id="cf-name"    type="text"  placeholder="Your name *"   autocomplete="name" />
+        <input id="cf-email"   type="email" placeholder="Work email *"  autocomplete="email" />
+        <input id="cf-company" type="text"  placeholder="Company name"  autocomplete="organization" />
+        <select id="cf-sap">
+          <option value="" disabled selected>Current SAP situation</option>
+          <option>SAP ECC — planning S/4HANA migration</option>
+          <option>SAP ECC — mid-project migration</option>
+          <option>S/4HANA — data governance needed</option>
+          <option>Stalled migration — need rescue</option>
+          <option>New SAP implementation</option>
+          <option>Other</option>
+        </select>
+        <textarea id="cf-message" placeholder="What are you working on? (migration scope, current challenges, timeline...)"></textarea>
+        <div id="cf-error" style="display:none;font-size:12px;color:#a5f3f5;margin-bottom:8px;padding:8px 10px;background:rgba(0,194,203,.1);border-radius:4px;border-left:3px solid var(--cyan)"></div>
+        <button type="button" id="cf-submit" onclick="submitContactForm()">Send message →</button>
+        <p style="font-size:11px;color:#475569;margin-top:10px;text-align:center">Your details are stored securely and never shared.</p>
+      </div>
+      <div id="cf-success" style="display:none;text-align:center;padding:32px 16px">
+        <div style="width:56px;height:56px;background:rgba(0,194,203,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:26px;color:var(--cyan)">✓</div>
+        <h3 style="font-size:18px;font-weight:600;color:white;margin-bottom:10px">Message received!</h3>
+        <p style="font-size:14px;color:#94a3b8;line-height:1.7">We will review your enquiry and get back to you within one business day. Check your inbox for a confirmation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-n">Ask4DS Inc</div>
+      <p class="footer-brand-d">Enterprise data transformation simplified — SAP ECC and S/4HANA migration specialists using Syniti ADM.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-h">Services</div>
+      <a href="#services">ECC → S/4HANA Migration</a>
+      <a href="#services">Syniti ADM Services</a>
+      <a href="#services">Data Governance (MDG)</a>
+      <a href="#services">Readiness Assessment</a>
+      <a href="#services">Migration Rescue</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-h">Expertise</div>
+      <a href="#platform">Syniti ADM / ADMM</a>
+      <a href="#services">LTMC &amp; Migration Cockpit</a>
+      <a href="#services">SAP Master Data Governance</a>
+      <a href="#services">MM · FI · SD · PP · PM · CO</a>
+      <a href="#services">Data Quality &amp; Profiling</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-h">Company</div>
+      <a href="#about">About us</a>
+      <a href="#industries">Industries</a>
+      <a href="#connect">Contact</a>
+      <a href="mailto:info@ask4ds.com">info@ask4ds.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Ask4DS Inc. All rights reserved.</p>
+    <a href="mailto:info@ask4ds.com" class="footer-email">info@ask4ds.com</a>
+  </div>
+</footer>
+
+<script>
+const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+/* SERVICE TABS */
+function showTab(e, id) {
+  document.querySelectorAll('.svc-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.svc-panel').forEach(p => p.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+
+/* FADE-IN OBSERVER */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+/* CONTACT FORM */
+async function submitContactForm() {
+  const btn    = document.getElementById('cf-submit');
+  const errBox = document.getElementById('cf-error');
+  const name    = document.getElementById('cf-name').value.trim();
+  const email   = document.getElementById('cf-email').value.trim();
+  const company = document.getElementById('cf-company').value.trim();
+  const sap     = document.getElementById('cf-sap').value;
+  const message = document.getElementById('cf-message').value.trim();
+  errBox.style.display = 'none';
+  if (!name)    { showError('Please enter your name.');                  return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+                { showError('Please enter a valid work email.');         return; }
+  if (!message) { showError('Please tell us what you are working on.'); return; }
+  btn.disabled    = true;
+  btn.textContent = 'Sending…';
+  const submittedAt = new Date().toLocaleString('en-US', {
+    timeZone: 'America/New_York', day: '2-digit', month: 'short',
+    year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true
+  }) + ' EST';
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method : 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body   : JSON.stringify({
+        name,
+        email,
+        company     : company || '(not provided)',
+        sap_system  : sap     || '(not selected)',
+        message,
+        submitted_at: submittedAt
+      })
+    });
+    const json = await res.json();
+    if (json.status === 'success') {
+      document.getElementById('contact-form').style.display  = 'none';
+      document.getElementById('cf-success').style.display    = 'block';
+    } else {
+      throw new Error(json.message || 'Non-success');
+    }
+  } catch (err) {
+    btn.disabled    = false;
+    btn.textContent = 'Send message →';
+    showError('Something went wrong — please try again or email us directly at info@ask4ds.com');
+  }
+}
+
+function showError(msg) {
+  const box = document.getElementById('cf-error');
+  box.textContent   = msg;
+  box.style.display = 'block';
+}
+</script>
+</body>
+</html>
